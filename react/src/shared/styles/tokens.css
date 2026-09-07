@@ -1,0 +1,183 @@
+/**
+ * tokens.css — Variables de diseño de FacturaFlow
+ *
+ * Fuente de verdad: DESIGN.md y code.html del export de Stitch.
+ * Importadas en index.css y disponibles en toda la app.
+ *
+ * Regla de uso: Todos los componentes React DEBEN referenciar
+ * estas variables en lugar de valores literales de color o tamaño.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+
+:root {
+  /* ─────────────────────────────────────────────
+   * TIPOGRAFÍA
+   * DESIGN.md L53 — Inter para UI estructural
+   * DESIGN.md L92 — JetBrains Mono para datos financieros
+   * ───────────────────────────────────────────── */
+  --font-sans:      'Inter', sans-serif;
+  --font-mono:      'JetBrains Mono', monospace;
+
+  /* Escalas tipográficas — DESIGN.md L52-113 */
+  --text-display-lg-size:    2rem;        /* 32px */
+  --text-display-lg-weight:  600;
+  --text-display-lg-line:    2.5rem;      /* 40px */
+  --text-display-lg-track:   -0.02em;
+
+  --text-headline-lg-size:   1.5rem;      /* 24px */
+  --text-headline-lg-weight: 600;
+  --text-headline-lg-line:   2rem;        /* 32px */
+  --text-headline-lg-track:  -0.015em;
+
+  --text-headline-md-size:   1.25rem;     /* 20px */
+  --text-headline-md-weight: 600;
+  --text-headline-md-line:   1.75rem;     /* 28px */
+  --text-headline-md-track:  -0.01em;
+
+  --text-headline-sm-size:   1rem;        /* 16px */
+  --text-headline-sm-weight: 600;
+  --text-headline-sm-line:   1.5rem;      /* 24px */
+  --text-headline-sm-track:  -0.005em;
+
+  --text-body-lg-size:       0.9375rem;   /* 15px */
+  --text-body-lg-weight:     400;
+  --text-body-lg-line:       1.375rem;    /* 22px */
+
+  --text-body-md-size:       0.875rem;    /* 14px */
+  --text-body-md-weight:     400;
+  --text-body-md-line:       1.25rem;     /* 20px */
+
+  --text-body-sm-size:       0.75rem;     /* 12px */
+  --text-body-sm-weight:     400;
+  --text-body-sm-line:       1rem;        /* 16px */
+
+  /* Mono para cifras financieras — DESIGN.md L91-107 */
+  --text-mono-lg-size:       1.375rem;    /* 22px */
+  --text-mono-lg-weight:     600;
+  --text-mono-lg-line:       1.75rem;     /* 28px */
+  --text-mono-lg-track:      -0.02em;
+
+  --text-mono-md-size:       0.875rem;    /* 14px */
+  --text-mono-md-weight:     500;
+  --text-mono-md-line:       1.25rem;     /* 20px */
+  --text-mono-md-track:      -0.01em;
+
+  --text-mono-sm-size:       0.75rem;     /* 12px */
+  --text-mono-sm-weight:     400;
+  --text-mono-sm-line:       1rem;        /* 16px */
+
+  /* Label CAPS — DESIGN.md L108-113 */
+  --text-label-caps-size:    0.6875rem;   /* 11px */
+  --text-label-caps-weight:  600;
+  --text-label-caps-line:    0.875rem;    /* 14px */
+  --text-label-caps-track:   0.06em;
+
+  /* ─────────────────────────────────────────────
+   * PALETA DE COLORES
+   * Fuente: code.html L22-40 + DESIGN.md L3-50
+   * ───────────────────────────────────────────── */
+
+  /* Primarios — estructura, sidebar, títulos */
+  --color-primary:                  #1f2d1e;
+  --color-primary-container:        #243324;
+  --color-on-primary:               #ffffff;
+  --color-on-primary-container:     #9ab095;
+  --color-inverse-primary:          #bacbb6;
+
+  /* Secundarios — acciones, botones primarios, tabs activos */
+  --color-secondary:                #435940;
+  --color-secondary-container:      #e8efe6;
+  --color-on-secondary:             #ffffff;
+  --color-on-secondary-container:   #2a3928;
+
+  /* Terciario — micro-bordes, iconos secundarios, badges */
+  --color-tertiary:                 #7C8B72;
+  --color-tertiary-container:       #26331f;
+
+  /* Superficies — fondos de contenedores, tarjetas */
+  --color-surface:                  #fbfaf8;   /* fondo base — ivory suave */
+  --color-surface-lowest:           #ffffff;   /* canvas de factura impresa */
+  --color-surface-low:              #f6f4ef;
+  --color-surface-container:        #edeae2;
+  --color-surface-high:             #e4e0d6;
+  --color-surface-variant:          #e4e2df;
+
+  /* Texto */
+  --color-on-surface:               #1d201c;
+  --color-on-surface-variant:       #5f685d;
+  --color-inverse-surface:          #30312f;
+  --color-inverse-on-surface:       #f2f0ed;
+
+  /* Bordes */
+  --color-outline:                  #8b9487;
+  --color-outline-variant:          #e2ded5;
+
+  /* Error */
+  --color-error:                    #b3261e;
+  --color-error-container:          #f9dedc;
+  --color-on-error:                 #ffffff;
+
+  /* ─────────────────────────────────────────────
+   * SEMÁNTICA FINANCIERA — DESIGN.md L155-158
+   * Usadas para badges de estado en facturas
+   * ───────────────────────────────────────────── */
+  --color-paid:                     #385A3F;   /* Pagada / Crédito / Éxito */
+  --color-paid-bg:                  #EAF2EB;
+  --color-pending:                  #8C6D23;   /* Pendiente / En revisión */
+  --color-pending-bg:               #FBF6EA;
+  --color-void:                     #843126;   /* Anulada / Disputada / Error */
+  --color-void-bg:                  #FDF0EE;
+
+  /* ─────────────────────────────────────────────
+   * ESPACIADO — DESIGN.md L121-131
+   * ───────────────────────────────────────────── */
+  --spacing-3xs:        0.125rem;   /* 2px  */
+  --spacing-2xs:        0.25rem;    /* 4px  */
+  --spacing-xs:         0.5rem;     /* 8px  */
+  --spacing-sm:         0.75rem;    /* 12px */
+  --spacing-md:         1rem;       /* 16px */
+  --spacing-lg:         1.5rem;     /* 24px */
+  --spacing-xl:         2rem;       /* 32px */
+  --spacing-2xl:        3rem;       /* 48px */
+  --spacing-sidebar:    16.5rem;    /* 264px — ancho fijo del sidebar */
+  --spacing-gutter:     1.25rem;    /* 20px  — gutter del grid */
+
+  /* ─────────────────────────────────────────────
+   * RADIOS DE BORDE — DESIGN.md L114-120
+   * ───────────────────────────────────────────── */
+  --radius-sm:    0.125rem;   /* 2px  */
+  --radius-base:  0.25rem;    /* 4px  — inputs, badges, checkboxes */
+  --radius-md:    0.375rem;   /* 6px  */
+  --radius-lg:    0.5rem;     /* 8px  — cards, dropdowns */
+  --radius-xl:    0.75rem;    /* 12px — paneles, modales, invoice preview */
+  --radius-full:  9999px;     /* pill — solo chips de estado */
+
+  /* ─────────────────────────────────────────────
+   * SOMBRAS DE ELEVACIÓN — DESIGN.md L176-188
+   * ───────────────────────────────────────────── */
+  --shadow-level-0: none;
+  --shadow-level-1: 0 1px 2px rgba(36, 51, 36, 0.04),
+                    0 2px 6px rgba(36, 51, 36, 0.02);
+  --shadow-level-2: 0 4px 14px rgba(36, 51, 36, 0.08),
+                    0 1px 3px rgba(36, 51, 36, 0.04);
+  --shadow-level-3: 0 12px 36px rgba(28, 35, 27, 0.16);
+  --shadow-print:   0 4px 20px rgba(36, 51, 36, 0.06),
+                    0 0 0 1px rgba(124, 139, 114, 0.18);
+
+  /* ─────────────────────────────────────────────
+   * BORDES DE COMPONENTES — DESIGN.md L180-188
+   * ───────────────────────────────────────────── */
+  --border-card:     1px solid rgba(106, 122, 97, 0.22);
+  --border-dropdown: 1px solid rgba(124, 139, 114, 0.35);
+  --border-input:    1px solid rgba(124, 139, 114, 0.4);
+
+  /* ─────────────────────────────────────────────
+   * LAYOUT — DESIGN.md L170-173
+   * ───────────────────────────────────────────── */
+  --layout-sidebar-width:   16.5rem;   /* 264px */
+  --layout-max-workspace:   1520px;    /* max-width del canvas central */
+  --layout-row-compact:     36px;      /* altura de fila tabla modo compacto */
+  --layout-row-standard:    44px;      /* altura de fila tabla modo estándar */
+}

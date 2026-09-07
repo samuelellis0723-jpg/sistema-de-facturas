@@ -1,0 +1,187 @@
+/* ─────────────────────────────────────────────────────────
+ * index.css — Punto de entrada de estilos globales
+ *
+ * Orden obligatorio:
+ *   1. @import tokens.css  (variables CSS — fuente de verdad de diseño)
+ *   2. Directivas Tailwind (base → components → utilities)
+ *   3. Overrides globales mínimos
+ * ───────────────────────────────────────────────────────── */
+
+@import './shared/styles/tokens.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Base global — alineado con code.html L10-14 ────────── */
+@layer base {
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    overscroll-behavior: none;
+    font-family: var(--font-sans);
+    background-color: var(--color-surface);
+    color: var(--color-on-surface);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Ocultar scrollbar nativo — code.html L14 */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Cifras tabulares en Inter (inline financiero) — DESIGN.md L166 */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* ─── Utilidades de capa compartida ──────────────────────── */
+@layer utilities {
+  /* Iconos de Material Symbols — renderizado de ligaduras */
+  .material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 20px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+  }
+  /* Tipografía semántica financiera — mapea al DESIGN.md */
+  .text-mono-lg {
+    font-family: var(--font-mono);
+    font-size: var(--text-mono-lg-size);
+    font-weight: var(--text-mono-lg-weight);
+    line-height: var(--text-mono-lg-line);
+    letter-spacing: var(--text-mono-lg-track);
+  }
+
+  .text-mono-md {
+    font-family: var(--font-mono);
+    font-size: var(--text-mono-md-size);
+    font-weight: var(--text-mono-md-weight);
+    line-height: var(--text-mono-md-line);
+    letter-spacing: var(--text-mono-md-track);
+  }
+
+  .text-mono-sm {
+    font-family: var(--font-mono);
+    font-size: var(--text-mono-sm-size);
+    font-weight: var(--text-mono-sm-weight);
+    line-height: var(--text-mono-sm-line);
+  }
+
+  .text-label-caps {
+    font-family: var(--font-sans);
+    font-size: var(--text-label-caps-size);
+    font-weight: var(--text-label-caps-weight);
+    line-height: var(--text-label-caps-line);
+    letter-spacing: var(--text-label-caps-track);
+    text-transform: uppercase;
+  }
+
+  /* Badges de estado financiero — DESIGN.md L216-219 */
+  .badge-paid {
+    color: var(--color-paid);
+    background-color: var(--color-paid-bg);
+    border-radius: var(--radius-full);
+    padding: 0.25rem 0.625rem;
+  }
+
+  .badge-pending {
+    color: var(--color-pending);
+    background-color: var(--color-pending-bg);
+    border-radius: var(--radius-full);
+    padding: 0.25rem 0.625rem;
+  }
+
+  .badge-void {
+    color: var(--color-void);
+    background-color: var(--color-void-bg);
+    border-radius: var(--radius-full);
+    padding: 0.25rem 0.625rem;
+  }
+
+  /* Sombras de elevación accesibles desde CSS — DESIGN.md L176-188 */
+  .shadow-l1 { box-shadow: var(--shadow-level-1); }
+  .shadow-l2 { box-shadow: var(--shadow-level-2); }
+  .shadow-l3 { box-shadow: var(--shadow-level-3); }
+  .shadow-print { box-shadow: var(--shadow-print); }
+}
+
+/* ─── Print / PDF — hoja A4 limpia ──────────────────────── */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 10mm;
+  }
+
+  /* Ocultar todo el chrome y navegación */
+  aside,
+  header,
+  nav,
+  .print\:hidden {
+    display: none !important;
+  }
+
+  /* Reset de contenedor principal a ancho completo de página */
+  body,
+  html,
+  #root,
+  .pl-64,
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+    background: white !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* La hoja A4 sin decoración */
+  #invoice-print-root {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+  }
+
+  /* Evitar saltos de página dentro de tablas */
+  table {
+    width: 100% !important;
+    page-break-inside: auto;
+  }
+
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+
+  thead {
+    display: table-header-group;
+  }
+
+  tfoot {
+    display: table-footer-group;
+  }
+
+  /* Totales y notas sin cortes huérfanos */
+  .break-inside-avoid {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
+
+
