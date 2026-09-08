@@ -1,17 +1,21 @@
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
-import { fileURLToPath, URL } from 'node:url'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
   resolve: {
-    alias: {
+    alias: [
       // Alineados con jsconfig.json — regla 6 de reglas.md
-      '@':          fileURLToPath(new URL('./src', import.meta.url)),
-      '@shared':    fileURLToPath(new URL('./src/shared', import.meta.url)),
-      '@features':  fileURLToPath(new URL('./src/features', import.meta.url)),
-      '@app':       fileURLToPath(new URL('./src/app', import.meta.url)),
-    },
+      // Los alias específicos van primero para que '@' no capture '@features' ni '@shared'
+      { find: '@shared', replacement: path.resolve(__dirname, 'src/shared') },
+      { find: '@features', replacement: path.resolve(__dirname, 'src/features') },
+      { find: '@app', replacement: path.resolve(__dirname, 'src/app') },
+      { find: '@', replacement: path.resolve(__dirname, 'src') },
+    ],
   },
 })

@@ -4,7 +4,7 @@
  * Expone acciones inmutables para InvoicesPage.
  */
 import { useState, useCallback, useEffect } from 'react';
-import { getInvoicesApi, createInvoiceApi } from '@features/invoices/services/invoice-api';
+import { getInvoicesApi, getInvoiceByIdApi, createInvoiceApi } from '@features/invoices/services/invoice-api';
 
 /** Datos de ejemplo iniciales alineados con code.html L489–562 */
 const INITIAL_INVOICES = [
@@ -141,11 +141,12 @@ export function useInvoices() {
     }
   }, [invoices]);
 
-  // Guardar en localStorage en cada cambio de la factura seleccionada
+  // Guardar en localStorage y consultar por ID en la API cuando cambia la factura seleccionada
   useEffect(() => {
     try {
       if (selectedId) {
         localStorage.setItem(SELECTED_ID_KEY, selectedId);
+        getInvoiceByIdApi(selectedId);
       }
     } catch (err) {
       console.warn('Error al persistir selectedId en localStorage:', err);
@@ -163,6 +164,7 @@ export function useInvoices() {
 
   const selectInvoice = useCallback((id) => {
     setSelectedId(id);
+    getInvoiceByIdApi(id);
   }, []);
 
   return {

@@ -62,14 +62,19 @@ export async function getInvoicesApi() {
  * @returns {Promise<object|null>} Factura encontrada o null
  */
 export async function getInvoiceByIdApi(id) {
+  console.log('id', id)
+  console.log('API_BASE_URL', API_BASE_URL)
   if (!id) return null;
   try {
     const res = await fetchWithTimeout(`${API_BASE_URL}/${encodeURIComponent(id)}`);
     if (!res.ok) {
+      console.log('res', res)
       if (res.status === 404) return null;
       throw new Error(`Error al buscar factura ${id}: HTTP ${res.status}`);
     }
-    return await res.json();
+    const data = await res.json();
+    console.log(`[GET /invoices/${id}] Factura obtenida por ID:`, data);
+    return data;
   } catch (err) {
     console.warn(`Error al consultar factura ${id} en la API:`, err.message);
     return null;

@@ -6,7 +6,7 @@
  *
  * Las rutas adicionales se declararán aquí en fases posteriores.
  */
-import InvoicesPage from '@features/invoices/pages/InvoicesPage';
+import InvoicesPage from '@features/invoices/pages/InvoicesPage.jsx';
 
 function App() {
   return <InvoicesPage />;
