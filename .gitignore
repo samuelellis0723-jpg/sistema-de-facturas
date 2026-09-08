@@ -1,18 +1,24 @@
 # Dependencias
-node_modules
+node_modules/
+**/node_modules/
 .pnp
 .pnp.js
 
 # Build y producción
-dist
-dist-ssr
-build
+dist/
+**/dist/
+dist-ssr/
+build/
+out/
 
 # Variables de entorno y secretos
-*.local
 .env
-.env.*
-!.env.example
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+*.env.*
 
 # Logs
 logs
@@ -24,26 +30,34 @@ pnpm-debug.log*
 lerna-debug.log*
 
 # Cobertura y pruebas
-coverage
-.nyc_output
+coverage/
+.nyc_output/
 
-# Cachés
+# Cachés de herramientas
+.cache/
+.vite/
 .eslintcache
-.vite
+.turbo/
 
 # Archivos del sistema operativo
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
 desktop.ini
 
-# Editores e IDEs
+# IDEs y editores
 .vscode/*
 !.vscode/extensions.json
 !.vscode/settings.json
-.idea
+.idea/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+*.swp
 *~

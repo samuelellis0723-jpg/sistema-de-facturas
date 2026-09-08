@@ -14,6 +14,8 @@ const STATUS_BADGE = {
   Emitida:  'bg-surface-container text-on-surface',
 };
 
+
+
 const STATUS_OPTIONS = ['ALL', 'Emitida', 'Pagada', 'Pendiente'];
 
 /**
