@@ -4,6 +4,7 @@
  * Expone acciones inmutables para InvoicesPage.
  */
 import { useState, useCallback, useEffect } from 'react';
+import { getInvoicesApi, createInvoiceApi } from '@features/invoices/services/invoice-api';
 
 /** Datos de ejemplo iniciales alineados con code.html L489–562 */
 const INITIAL_INVOICES = [
@@ -118,6 +119,19 @@ export function useInvoices() {
     return loadStoredSelectedId(initialList[0]?.id ?? 'FAC-2025-0043');
   });
 
+  // Sincronizar con el servidor db.json al iniciar si json-server está corriendo
+  useEffect(() => {
+    let isMounted = true;
+    getInvoicesApi().then((serverInvoices) => {
+      if (isMounted && serverInvoices && serverInvoices.length > 0) {
+        setInvoices(serverInvoices);
+      }
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   // Guardar en localStorage en cada cambio del arreglo de facturas
   useEffect(() => {
     try {
@@ -140,10 +154,11 @@ export function useInvoices() {
 
   const selectedInvoice = invoices.find(inv => inv.id === selectedId) ?? invoices[0] ?? null;
 
-  /** Agrega una factura nueva de forma inmutable y la selecciona */
+  /** Agrega una factura nueva de forma inmutable, la selecciona y la persiste en db.json */
   const addInvoice = useCallback((invoice) => {
     setInvoices(prev => [invoice, ...prev]);
     setSelectedId(invoice.id);
+    createInvoiceApi(invoice);
   }, []);
 
   const selectInvoice = useCallback((id) => {

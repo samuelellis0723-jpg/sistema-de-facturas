@@ -188,7 +188,7 @@ export function useInvoiceForm({ onSaveInvoice, onDraftChange, initialInvoices =
     }
 
     const invoice = {
-      id: crypto.randomUUID(),
+      id: draft.code.trim() || crypto.randomUUID(),
       code: draft.code.trim(),
       issueDate: draft.issueDate,
       dueDate: draft.dueDate,
